@@ -1,0 +1,31 @@
+_auto := true
+
+~LButton::autofire()
+Numlock::_auto := ! _auto
+F1::ExitApp
+
+autofire()
+{
+global _auto
+if _auto
+{
+Loop
+{
+if GetKeyState("LButton", "P")
+{
+SendInput {LButton DownTemp}
+Sleep 30
+mouseXY(0, 1)
+SendInput {LButton Up}
+Sleep 25
+}
+else
+break
+} ;; loop
+} ;; if
+} ;; autofire()
+
+mouseXY(x,y)
+{
+	Dllcall("mouse_event",uint,1,int,x,int,y,uint,0,int,0)
+}
